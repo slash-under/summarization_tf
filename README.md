@@ -1,5 +1,7 @@
 # Attention-based Tree-to-Sequence Code Summarization Model
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/slash-under/summarization_tf/master?filepath=notebooks%2Fexample.ipynb)
+
 The TensorFlow Eager Execution implementation of [Source Code Summarization with Extended Tree-LSTM](https://arxiv.org/abs/1906.08094) (Shido+, 2019)
 
 including:
