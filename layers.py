@@ -2,8 +2,6 @@
 
 import tensorflow as tf
 from utils import *
-tfe = tf.contrib.eager
-
 
 class TreeEmbeddingLayer(tf.keras.Model):
     def __init__(self, dim_E, in_vocab):
@@ -51,9 +49,9 @@ class ChildSumLSTMLayerWithEmbedding(tf.keras.Model):
         self.U_f = tf.keras.layers.Dense(dim_out, use_bias=False)
         self.U_iuo = tf.keras.layers.Dense(dim_out * 3, use_bias=False)
         self.W = tf.keras.layers.Dense(dim_out * 4)
-        # self.h_init = tfe.Variable(
+        # self.h_init = tf.Variable(
         #     tf.get_variable("h_init", [1, dim_out], tf.float32, initializer=he_normal()))
-        # self.c_init = tfe.Variable(
+        # self.c_init = tf.Variable(
         #     tf.get_variable("h_init", [1, dim_out], tf.float32, initializer=he_normal()))
         self.h_init = tf.zeros([1, dim_out], tf.float32)
         self.c_init = tf.zeros([1, dim_out], tf.float32)
@@ -124,9 +122,9 @@ class ChildSumLSTMLayer(tf.keras.Model):
         self.U_f = tf.keras.layers.Dense(dim_out, use_bias=False)
         self.U_iuo = tf.keras.layers.Dense(dim_out * 3, use_bias=False)
         self.W = tf.keras.layers.Dense(dim_out * 4)
-        # self.h_init = tfe.Variable(
+        # self.h_init = tf.Variable(
         #     tf.get_variable("h_init", [1, dim_out], tf.float32, initializer=he_normal()))
-        # self.c_init = tfe.Variable(
+        # self.c_init = tf.Variable(
         #     tf.get_variable("h_init", [1, dim_out], tf.float32, initializer=he_normal()))
         self.h_init = tf.zeros([1, dim_out], tf.float32)
         self.c_init = tf.zeros([1, dim_out], tf.float32)
@@ -183,9 +181,9 @@ class ChildSumLSTMLayerTreeBase(tf.keras.Model):
         self.U_f = tf.keras.layers.Dense(dim_out, use_bias=False)
         self.U_iuo = tf.keras.layers.Dense(dim_out * 3, use_bias=False)
         self.W = tf.keras.layers.Dense(dim_out * 4)
-        # self.h_init = tfe.Variable(
+        # self.h_init = tf.Variable(
         #     tf.get_variable("h_init", [1, dim_out], tf.float32, initializer=he_normal()))
-        # self.c_init = tfe.Variable(
+        # self.c_init = tf.Variable(
         #     tf.get_variable("h_init", [1, dim_out], tf.float32, initializer=he_normal()))
         self.h_init = tf.zeros([1, dim_out], tf.float32)
         self.c_init = tf.zeros([1, dim_out], tf.float32)
@@ -257,9 +255,9 @@ class NaryLSTMLayer(tf.keras.Model):
         self.U_f2 = tf.keras.layers.Dense(dim_out, use_bias=False)
         self.U_iuo = tf.keras.layers.Dense(dim_out * 3, use_bias=False)
         self.W = tf.keras.layers.Dense(dim_out * 4)
-        # self.h_init = tfe.Variable(
+        # self.h_init = tf.Variable(
         #     tf.get_variable("h_init", [1, dim_out], tf.float32, initializer=he_normal()))
-        # self.c_init = tfe.Variable(
+        # self.c_init = tf.Variable(
         #     tf.get_variable("h_init", [1, dim_out], tf.float32, initializer=he_normal()))
         self.h_init = tf.zeros([1, dim_out], tf.float32)
         self.c_init = tf.zeros([1, dim_out], tf.float32)
@@ -318,18 +316,18 @@ class BiLSTM_(tf.keras.Model):
     def __init__(self, dim, return_seq=False):
         super(BiLSTM_, self).__init__()
         self.dim = dim
-        # self.c_init_f = tfe.Variable(tf.get_variable("c_init_f", [1, dim], tf.float32,
+        # self.c_init_f = tf.Variable(tf.get_variable("c_init_f", [1, dim], tf.float32,
         #                                              initializer=he_normal()))
-        # self.h_init_f = tfe.Variable(tf.get_variable("h_initf", [1, dim], tf.float32,
+        # self.h_init_f = tf.Variable(tf.get_variable("h_initf", [1, dim], tf.float32,
         #                                              initializer=he_normal()))
-        # self.c_init_b = tfe.Variable(tf.get_variable("c_init_b", [1, dim], tf.float32,
+        # self.c_init_b = tf.Variable(tf.get_variable("c_init_b", [1, dim], tf.float32,
         #                                              initializer=he_normal()))
-        # self.h_init_b = tfe.Variable(tf.get_variable("h_init_b", [1, dim], tf.float32,
+        # self.h_init_b = tf.Variable(tf.get_variable("h_init_b", [1, dim], tf.float32,
         #                                              initializer=he_normal()))
-        self.c_init_f = tfe.Variable(tf.random_normal([1, dim], stddev=0.01, dtype=tf.float32))
-        self.h_init_f = tfe.Variable(tf.random_normal([1, dim], stddev=0.01, dtype=tf.float32))
-        self.c_init_b = tfe.Variable(tf.random_normal([1, dim], stddev=0.01, dtype=tf.float32))
-        self.h_init_b = tfe.Variable(tf.random_normal([1, dim], stddev=0.01, dtype=tf.float32))
+        self.c_init_f = tf.Variable(tf.random_normal([1, dim], stddev=0.01, dtype=tf.float32))
+        self.h_init_f = tf.Variable(tf.random_normal([1, dim], stddev=0.01, dtype=tf.float32))
+        self.c_init_b = tf.Variable(tf.random_normal([1, dim], stddev=0.01, dtype=tf.float32))
+        self.h_init_b = tf.Variable(tf.random_normal([1, dim], stddev=0.01, dtype=tf.float32))
         self.Cell_f = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(dim)
         self.Cell_b = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(dim)
         self.fc = tf.keras.layers.Dense(dim, use_bias=False)
@@ -358,10 +356,10 @@ class BiLSTM(tf.keras.Model):
     def __init__(self, dim, return_seq=False):
         super(BiLSTM, self).__init__()
         self.dim = dim
-        self.c_init_f = tfe.Variable(tf.random_normal([1, dim], stddev=0.01, dtype=tf.float32))
-        self.h_init_f = tfe.Variable(tf.random_normal([1, dim], stddev=0.01, dtype=tf.float32))
-        self.c_init_b = tfe.Variable(tf.random_normal([1, dim], stddev=0.01, dtype=tf.float32))
-        self.h_init_b = tfe.Variable(tf.random_normal([1, dim], stddev=0.01, dtype=tf.float32))
+        self.c_init_f = tf.Variable(tf.random_normal([1, dim], stddev=0.01, dtype=tf.float32))
+        self.h_init_f = tf.Variable(tf.random_normal([1, dim], stddev=0.01, dtype=tf.float32))
+        self.c_init_b = tf.Variable(tf.random_normal([1, dim], stddev=0.01, dtype=tf.float32))
+        self.h_init_b = tf.Variable(tf.random_normal([1, dim], stddev=0.01, dtype=tf.float32))
         self.lay_f = tf.keras.layers.CuDNNLSTM(dim, return_sequences=True, return_state=True)
         self.lay_b = tf.keras.layers.CuDNNLSTM(dim, return_sequences=True, return_state=True)
         self.fc = tf.keras.layers.Dense(dim, use_bias=False)
@@ -397,9 +395,9 @@ class ShidoTreeLSTMLayer(tf.keras.Model):
         self.U_u = BiLSTM(dim_out)
         self.U_o = BiLSTM(dim_out)
         self.W = tf.keras.layers.Dense(dim_out * 4)
-        # self.h_init = tfe.Variable(
+        # self.h_init = tf.Variable(
         #     tf.get_variable("h_init", [1, dim_out], tf.float32, initializer=he_normal()))
-        # self.c_init = tfe.Variable(
+        # self.c_init = tf.Variable(
         #     tf.get_variable("c_init", [1, dim_out], tf.float32, initializer=he_normal()))
         self.h_init = tf.zeros([1, dim_out], tf.float32)
         self.c_init = tf.zeros([1, dim_out], tf.float32)
@@ -460,9 +458,9 @@ class ShidoTreeLSTMLayerTreeBase(tf.keras.Model):
         self.U_u = BiLSTM(dim_out)
         self.U_o = BiLSTM(dim_out)
         self.W = tf.keras.layers.Dense(dim_out * 4)
-        # self.h_init = tfe.Variable(
+        # self.h_init = tf.Variable(
         #     tf.get_variable("h_init", [1, dim_out], tf.float32, initializer=he_normal()))
-        # self.c_init = tfe.Variable(
+        # self.c_init = tf.Variable(
         #     tf.get_variable("c_init", [1, dim_out], tf.float32, initializer=he_normal()))
         self.h_init = tf.zeros([1, dim_out], tf.float32)
         self.c_init = tf.zeros([1, dim_out], tf.float32)
@@ -539,9 +537,9 @@ class ShidoTreeLSTMWithEmbedding(ShidoTreeLSTMLayer):
         self.U_u = BiLSTM(dim_out)
         self.U_o = BiLSTM(dim_out)
         self.W = tf.keras.layers.Dense(dim_out * 4)
-        # self.h_init = tfe.Variable(
+        # self.h_init = tf.Variable(
         #     tf.get_variable("h_init", [1, dim_out], tf.float32, initializer=he_normal()))
-        # self.c_init = tfe.Variable(
+        # self.c_init = tf.Variable(
         #     tf.get_variable("c_init", [1, dim_out], tf.float32, initializer=he_normal()))
         self.h_init = tf.zeros([1, dim_out], tf.float32)
         self.c_init = tf.zeros([1, dim_out], tf.float32)
@@ -594,9 +592,9 @@ class LSTMEncoder(tf.keras.Model):
     def __init__(self, dim, layer=1):
         super(LSTMEncoder, self).__init__()
         self.dim = dim
-        # self.c_init_f = tfe.Variable(tf.get_variable("c_init_f", [1, dim], tf.float32,
+        # self.c_init_f = tf.Variable(tf.get_variable("c_init_f", [1, dim], tf.float32,
         #                                              initializer=he_normal()))
-        # self.h_init_f = tfe.Variable(tf.get_variable("h_initf", [1, dim], tf.float32,
+        # self.h_init_f = tf.Variable(tf.get_variable("h_initf", [1, dim], tf.float32,
         #                                              initializer=he_normal()))
         self.Cell_f = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(dim)
         self.h_init_f = tf.zeros([1, dim], tf.float32)
@@ -621,3 +619,4 @@ class SequenceEmbeddingLayer(tf.keras.Model):
     def call(self, y):
         y = self.E(y)
         return y
+
