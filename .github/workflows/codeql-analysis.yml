@@ -40,7 +40,7 @@ jobs:
     - name: Install deps
       shell: bash
       run: |
-       sudo apt install libcurl4-nss-dev -y
+       sudo apt install libcurl4-nss-dev python-numpy -y
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
