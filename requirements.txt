@@ -55,7 +55,7 @@ isort==4.2.5
 itsdangerous==0.24
 jdcal==1.3
 jedi==0.10.2
-Jinja2==2.9.6
+Jinja2==2.11.3
 joblib==0.12.5
 jsonschema==2.6.0
 jupyter==1.0.0
@@ -121,7 +121,7 @@ pytest==3.0.7
 python-dateutil==2.6.0
 pytz==2017.2
 PyWavelets==1.0.2
-PyYAML==3.12
+PyYAML==5.4
 pyzmq==16.0.2
 QtAwesome==0.4.4
 qtconsole==4.3.0
@@ -156,7 +156,7 @@ tqdm==4.26.0
 traitlets==4.3.2
 unicodecsv==0.14.1
 wcwidth==0.1.7
-Werkzeug==0.12.2
+Werkzeug==1.0.1
 widgetsnbextension==2.0.0
 wrapt==1.10.10
 xlrd==1.0.0
